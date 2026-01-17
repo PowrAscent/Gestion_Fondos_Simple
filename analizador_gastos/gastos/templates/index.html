@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'gastos/styles.css' %}">
+    <title>Gestión de Gastos Personales</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gluten:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Gestión de Gastos Personales Sencilla</h1>
+    </header>
+    <main>
+        <section>
+            <form method="POST" class="form-gastos">
+                {% csrf_token %}
+                <textarea id="gastos" name="gastos"></textarea>
+                <button type="submit">Calcular</button>
+            </form>
+
+            <a href="{% url 'index' %}" class="btn-refrescar">Refrescar</a>
+
+            {% if total %}
+
+                <h2 class="resultados">Resultados</h2>
+
+                <p class="resultados">Total : {{ total }}</p>
+                <p class="resultados">Cantidad : {{ cantidad }}</p>
+                <p class="resultados">Promedio : {{ promedio }}</p>
+
+            {% endif %}
+
+            {% if error %}
+
+            <div class="error">{{ error }}</div>
+
+            {% endif %}
+
+        </section>
+    </main>
+</body>
+</html>
